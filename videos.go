@@ -37,6 +37,7 @@ type Video struct {
 	Title       string     `json:"title,omitempty"`
 	Description string     `json:"description,omitempty"`
 	PublishedAt string     `json:"publishedAt,omitempty"`
+	UpdatedAt   string     `json:"updatedAt,omitempty"`
 	Tags        []string   `json:"tags,omitempty"`
 	Metadata    []Metadata `json:"metadata,omitempty"`
 	Source      *Source    `json:"source,omitempty"`

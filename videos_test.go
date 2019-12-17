@@ -34,6 +34,7 @@ var videoJSONResponses = []string{`{
 	  }
 	],
 	"publishedAt": "2019-07-14T23:36:18.598Z",
+	"updatedAt": "2019-07-14T23:49:18.598Z",
 	"source": {
 	  "uri": "/videos/vi4k0jvEUuaTdRAEjQ4Jfagz/source"
 	},
@@ -63,6 +64,7 @@ var videoJSONResponses = []string{`{
 	  }
 	],
 	"publishedAt": "2019-07-16T23:36:18.598Z",
+	"updatedAt": "2019-07-16T23:49:18.598Z",
 	"source": {
 	  "uri": "/videos/vi6HangYsow3vXxwdx3YMlAb/source"
 	},
@@ -81,6 +83,7 @@ var videoStructs = []Video{
 		Title:       "Maths video",
 		Description: "An amazing video explaining the string theory",
 		PublishedAt: "2019-07-14T23:36:18.598Z",
+		UpdatedAt:   "2019-07-14T23:49:18.598Z",
 		Tags:        []string{"maths", "string theory", "video"},
 		Metadata: []Metadata{
 			{
@@ -111,6 +114,7 @@ var videoStructs = []Video{
 		Title:       "Maths video 2",
 		Description: "An amazing video explaining the string theory 2",
 		PublishedAt: "2019-07-16T23:36:18.598Z",
+		UpdatedAt:   "2019-07-16T23:49:18.598Z",
 		Tags:        []string{"maths", "string theory"},
 		Metadata: []Metadata{
 			{
@@ -337,6 +341,54 @@ func TestVideos_List(t *testing.T) {
 		CurrentPage: 1,
 		PageSize:    25,
 		SortBy:      "publishedAt",
+		SortOrder:   "desc",
+		Tags:        []string{"tag1", "tag2"},
+		Metadata:    map[string]string{"key": "value", "key2": "value2"},
+	}
+	videos, err := client.Videos.List(opts)
+	if err != nil {
+		t.Errorf("Videos.List error: %v", err)
+	}
+
+	expected := &VideoList{
+		Data:       videoStructs,
+		Pagination: &paginationStruct,
+	}
+	if !reflect.DeepEqual(videos, expected) {
+		t.Errorf("Videos.List\n got=%#v\nwant=%#v", videos, expected)
+	}
+}
+
+func TestVideos_ListUpdatedAt(t *testing.T) {
+	setup()
+	defer teardown()
+	JSONResp := fmt.Sprintf(
+		`{"data":[%s,%s], "pagination":%s}`,
+		videoJSONResponses[0],
+		videoJSONResponses[1],
+		paginationJSON)
+
+	mux.HandleFunc("/videos", func(w http.ResponseWriter, r *http.Request) {
+		testMethod(t, r, http.MethodGet)
+		expectedQuery := url.Values{
+			"currentPage":    []string{"1"},
+			"pageSize":       []string{"25"},
+			"sortBy":         []string{"updatedAt"},
+			"sortOrder":      []string{"desc"},
+			"tags[]":         []string{"tag1", "tag2"},
+			"metadata[key]":  []string{"value"},
+			"metadata[key2]": []string{"value2"},
+		}
+		if !reflect.DeepEqual(r.URL.Query(), expectedQuery) {
+			t.Errorf("Request querystring\n got=%#v\nwant=%#v", r.URL.Query(), expectedQuery)
+		}
+		fmt.Fprint(w, JSONResp)
+	})
+
+	opts := &VideoOpts{
+		CurrentPage: 1,
+		PageSize:    25,
+		SortBy:      "updatedAt",
 		SortOrder:   "desc",
 		Tags:        []string{"tag1", "tag2"},
 		Metadata:    map[string]string{"key": "value", "key2": "value2"},

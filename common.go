@@ -41,10 +41,10 @@ func checkTimecode(timecode string) error {
 
 func checkOpts(opts *VideoOpts) error {
 
-	var rxPat = regexp.MustCompile(`^(publishedAt|title)$`)
+	var rxPat = regexp.MustCompile(`^(publishedAt|updatedAt|title)$`)
 
 	if opts.SortBy != "" && !rxPat.MatchString(opts.SortBy) {
-		return fmt.Errorf("SortBy value is invalid, it must be 'publishedAt' or 'title'")
+		return fmt.Errorf("SortBy value is invalid, it must be 'publishedAt', 'updatedAt' or 'title'")
 	}
 
 	rxPat = regexp.MustCompile(`^(asc|desc)$`)
