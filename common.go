@@ -56,8 +56,8 @@ func checkOpts(opts *VideoOpts) error {
 }
 
 func checkPlayerID(PlayerID string) error {
-	if !strings.HasPrefix(PlayerID, "pl") {
-		return fmt.Errorf("Player id %s is invalid, it must start with 'pl'", PlayerID)
+	if !strings.HasPrefix(PlayerID, "pl") && !strings.HasPrefix(PlayerID, "pt") {
+		return fmt.Errorf("Player id %s is invalid, it must start with 'pl' or 'pt'", PlayerID)
 	}
 	return nil
 }

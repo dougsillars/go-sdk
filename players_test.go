@@ -12,7 +12,7 @@ import (
 
 var playerJSONResponses = []string{
 	`{
-		"playerId": "pl3Lony8J6NozV71Yxn8KVFn",
+		"playerId": "pt3Lony8J6NozV71Yxn8KVFn",
 		"assets": {
 			"logo": "https://cdn.api.video/player/pl3Lony8J6NozV71Yxn8KVFn/logo.png",
 			"link": "https://api.video"
@@ -71,7 +71,7 @@ var playerJSONResponses = []string{
 
 var playerStructs = []Player{
 	Player{
-		PlayerID:              "pl3Lony8J6NozV71Yxn8KVFn",
+		PlayerID:              "pt3Lony8J6NozV71Yxn8KVFn",
 		ShapeMargin:           3,
 		ShapeRadius:           10,
 		ShapeAspect:           "flat",
@@ -179,12 +179,12 @@ var playerRequestStruct = PlayerRequest{
 func TestPlayers_Get(t *testing.T) {
 	setup()
 	defer teardown()
-	mux.HandleFunc("/players/pl3Lony8J6NozV71Yxn8KVFn", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/players/pt3Lony8J6NozV71Yxn8KVFn", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, http.MethodGet)
 		fmt.Fprint(w, playerJSONResponses[0])
 	})
 
-	player, err := client.Players.Get("pl3Lony8J6NozV71Yxn8KVFn")
+	player, err := client.Players.Get("pt3Lony8J6NozV71Yxn8KVFn")
 	if err != nil {
 		t.Errorf("Players.Get error: %v", err)
 	}
@@ -287,7 +287,7 @@ func TestPlayers_Create(t *testing.T) {
 func TestPlayers_Update(t *testing.T) {
 	setup()
 	defer teardown()
-	mux.HandleFunc("/players/pl3Lony8J6NozV71Yxn8KVFn", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/players/pt3Lony8J6NozV71Yxn8KVFn", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, http.MethodPatch)
 		expectedBody := map[string]interface{}{
 			"shapeMargin":           float64(3),
@@ -323,7 +323,7 @@ func TestPlayers_Update(t *testing.T) {
 		fmt.Fprint(w, playerJSONResponses[0])
 	})
 
-	player, err := client.Players.Update("pl3Lony8J6NozV71Yxn8KVFn", &playerRequestStruct)
+	player, err := client.Players.Update("pt3Lony8J6NozV71Yxn8KVFn", &playerRequestStruct)
 	if err != nil {
 		t.Errorf("Players.Update error: %v", err)
 	}
@@ -337,11 +337,11 @@ func TestPlayers_Update(t *testing.T) {
 func TestPlayers_Delete(t *testing.T) {
 	setup()
 	defer teardown()
-	mux.HandleFunc("/players/pl3Lony8J6NozV71Yxn8KVFn", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/players/pt3Lony8J6NozV71Yxn8KVFn", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, http.MethodDelete)
 	})
 
-	err := client.Players.Delete("pl3Lony8J6NozV71Yxn8KVFn")
+	err := client.Players.Delete("pt3Lony8J6NozV71Yxn8KVFn")
 	if err != nil {
 		t.Errorf("Players.Delete error: %v", err)
 	}
@@ -350,7 +350,7 @@ func TestPlayers_Delete(t *testing.T) {
 func TestPlayers_UploadLogo(t *testing.T) {
 	setup()
 	defer teardown()
-	mux.HandleFunc("/players/pl3Lony8J6NozV71Yxn8KVFn/logo", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/players/pt3Lony8J6NozV71Yxn8KVFn/logo", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, http.MethodPost)
 		fmt.Fprint(w, playerJSONResponses[0])
 	})
@@ -358,7 +358,7 @@ func TestPlayers_UploadLogo(t *testing.T) {
 	file := createTempFile("test.logo", 1024*1024)
 	defer os.Remove(file)
 
-	player, err := client.Players.UploadLogo("pl3Lony8J6NozV71Yxn8KVFn", "https://api.video", file)
+	player, err := client.Players.UploadLogo("pt3Lony8J6NozV71Yxn8KVFn", "https://api.video", file)
 	if err != nil {
 		t.Errorf("Captions.Upload error: %v", err)
 	}
