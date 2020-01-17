@@ -69,4 +69,7 @@ p, err := c.Players.UploadLogo(
 //Delete a player
 err := client.Players.Delete("playerID")
 
+//Delete a player logo
+err := client.Players.DeleteLogo("playerID")
+
 ```

@@ -25,6 +25,7 @@ type Client struct {
 	Livestreams  LivestreamsServiceI
 	UploadTokens UploadTokensServiceI
 	Captions     CaptionsServiceI
+	Chapters     ChaptersServiceI
 	Players      PlayersServiceI
 	Statistics   StatisticsServiceI
 	Account      AccountServiceI
@@ -89,6 +90,7 @@ func newClient(apiKey, envURL string) *Client {
 	c.Livestreams = &LivestreamsService{client: c}
 	c.UploadTokens = &UploadTokensService{client: c}
 	c.Captions = &CaptionsService{client: c}
+	c.Chapters = &ChaptersService{client: c}
 	c.Players = &PlayersService{client: c}
 	c.Statistics = &StatisticsService{client: c}
 	c.Account = &AccountService{client: c}

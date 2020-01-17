@@ -368,3 +368,16 @@ func TestPlayers_UploadLogo(t *testing.T) {
 		t.Errorf("Captions.Upload\n got=%#v\nwant=%#v", player, expected)
 	}
 }
+
+func TestPlayers_DeleteLogo(t *testing.T) {
+	setup()
+	defer teardown()
+	mux.HandleFunc("/players/pt3Lony8J6NozV71Yxn8KVFn/logo", func(w http.ResponseWriter, r *http.Request) {
+		testMethod(t, r, http.MethodDelete)
+	})
+
+	err := client.Players.DeleteLogo("pt3Lony8J6NozV71Yxn8KVFn")
+	if err != nil {
+		t.Errorf("Players.DeleteLogo error: %v", err)
+	}
+}

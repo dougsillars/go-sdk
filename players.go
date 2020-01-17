@@ -19,6 +19,7 @@ type PlayersServiceI interface {
 	Update(playerID string, updateRequest *PlayerRequest) (*Player, error)
 	Delete(playerID string) error
 	UploadLogo(playerID string, link string, filepath string) (*Player, error)
+	DeleteLogo(playerID string) error
 }
 
 // PlayersService communicating with the Players
@@ -192,7 +193,7 @@ func (s *PlayersService) Update(playerID string, updateRequest *PlayerRequest) (
 	return p, nil
 }
 
-//Delete a video container
+//Delete a player
 func (s *PlayersService) Delete(playerID string) error {
 
 	err := checkPlayerID(playerID)
@@ -245,4 +246,28 @@ func (s *PlayersService) UploadLogo(playerID string, link string, filePath strin
 	}
 
 	return p, nil
+}
+
+//DeleteLogo delete a player logo
+func (s *PlayersService) DeleteLogo(playerID string) error {
+
+	err := checkPlayerID(playerID)
+	if err != nil {
+		return err
+	}
+
+	path := fmt.Sprintf("%s/%s/logo", playersBasePath, playerID)
+
+	req, err := s.client.prepareRequest(http.MethodDelete, path, nil)
+	if err != nil {
+		return err
+	}
+
+	_, err = s.client.do(req, nil)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
