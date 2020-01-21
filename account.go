@@ -21,8 +21,8 @@ type AccountService struct {
 
 // Account represents an api.video Account
 type Account struct {
-	Quota *Quota `json:"quota,omitempty"`
-	Term  *Term  `json:"term,omitempty"`
+	Quota    *Quota   `json:"quota,omitempty"`
+	Features []string `json:"features,omitempty"`
 }
 
 // Quota represents a Quota
@@ -30,12 +30,6 @@ type Quota struct {
 	QuotaUsed      int `json:"quotaUsed,omitempty"`
 	QuotaRemaining int `json:"quotaRemaining,omitempty"`
 	QuotaTotal     int `json:"quotaTotal,omitempty"`
-}
-
-// Term represents a Term
-type Term struct {
-	StartAt string `json:"startAt,omitempty"`
-	EndAt   string `json:"endAt,omitempty"`
 }
 
 //Get returns an Account

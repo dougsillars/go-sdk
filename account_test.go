@@ -13,10 +13,13 @@ var accountJSONResponse string = `{
 	  "quotaRemaining": 54,
 	  "quotaTotal": 60
 	},
-	"term": {
-	  "startAt": "2019-02-20",
-	  "endAt": "2019-03-20"
-	}
+	"features": [
+	  "app.dynamic_metadata",
+	  "app.event_log",
+	  "player.white_label",
+	  "stats.player_events",
+	  "transcode.mp4_support"
+	]
   }`
 
 var accountStruct = Account{
@@ -25,9 +28,12 @@ var accountStruct = Account{
 		QuotaRemaining: 54,
 		QuotaTotal:     60,
 	},
-	Term: &Term{
-		StartAt: "2019-02-20",
-		EndAt:   "2019-03-20",
+	Features: []string{
+		"app.dynamic_metadata",
+		"app.event_log",
+		"player.white_label",
+		"stats.player_events",
+		"transcode.mp4_support",
 	},
 }
 
