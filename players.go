@@ -46,7 +46,6 @@ type Player struct {
 	BackgroundTop         string        `json:"backgroundTop,omitempty"`
 	BackgroundBottom      string        `json:"backgroundBottom,omitempty"`
 	BackgroundText        string        `json:"backgroundText,omitempty"`
-	Language              string        `json:"language,omitempty"`
 	EnableAPI             bool          `json:"enableApi,omitempty"`
 	EnableControls        bool          `json:"enableControls,omitempty"`
 	ForceAutoplay         bool          `json:"forceAutoplay,omitempty"`
@@ -78,7 +77,6 @@ type PlayerRequest struct {
 	BackgroundTop         string `json:"backgroundTop,omitempty"`
 	BackgroundBottom      string `json:"backgroundBottom,omitempty"`
 	BackgroundText        string `json:"backgroundText,omitempty"`
-	Language              string `json:"language,omitempty"`
 	EnableAPI             bool   `json:"enableApi"`
 	EnableControls        bool   `json:"enableControls"`
 	ForceAutoplay         bool   `json:"forceAutoplay"`
